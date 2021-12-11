@@ -1,22 +1,23 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone"
-    xmlns:zcml="http://namespaces.zope.org/zcml">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
 
   <plone:service
-    method="POST"
-    name="@files-list"
-    for="*"
-    factory=".files_list.FilesListService"
-    permission="cmf.ModifyPortalContent"
-    />
+      method="POST"
+      factory=".files_list.FilesListService"
+      for="*"
+      permission="cmf.ModifyPortalContent"
+      name="@files-list"
+      />
 
   <plone:service
-    method="POST"
-    name="@save-files"
-    for="*"
-    factory=".save_files.SaveFilesService"
-    permission="cmf.ModifyPortalContent"
-    />
+      method="POST"
+      factory=".save_files.SaveFilesService"
+      for="*"
+      permission="cmf.ModifyPortalContent"
+      name="@save-files"
+      />
 
 </configure>

@@ -2,9 +2,7 @@
 from Products.Five import BrowserView
 from plone import api
 from plone.memoize import ram
-from plone.protect.authenticator import createToken
 from time import time
-from AccessControl import Unauthorized
 
 import pkg_resources
 
