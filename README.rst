@@ -24,37 +24,34 @@
     :alt: License
 
 
-========================
-redturtle.filesretriever
-========================
+=========================
+RedTurtle Files Retriever
+=========================
 
-Tell me what your product does
+Utility view to retrieve massive files from a remote page.
 
-Features
---------
+View
+----
 
-- Can be bullet points
+There is an helper view that you can call on every Plone folderish context.
 
+Files will be saved in that context.
 
-Examples
---------
+Restapi endpoints
+-----------------
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+There are two endpoints:
 
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
+- @files-list (POST): accept an url and some CSS selectors, and returns a list of found links in the page.
+- @save-files (POST): accept a list of urls/titles and will download resources and save them in the current context.
 
 Translations
 ------------
 
 This product has been translated into
 
-- Klingon (thanks, K'Plai)
+- English
+- Italian
 
 
 Installation
@@ -76,16 +73,8 @@ and then running ``bin/buildout``
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/redturtle.filesretriever/issues
-- Source Code: https://github.com/collective/redturtle.filesretriever
-- Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+- Issue Tracker: https://github.com/RedTurtle/redturtle.filesretriever/issues
+- Source Code: https://github.com/RedTurtle/redturtle.filesretriever
 
 
 License
