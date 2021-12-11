@@ -1,5 +1,5 @@
 ========================
-redturtle.linksretriever
+redturtle.filesretriever
 ========================
 
 User documentation

@@ -4,11 +4,13 @@
 *.mo
 *.py?
 *.swp
+.python-version
 # dirs
 bin/
 buildout-cache/
 develop-eggs/
 eggs/
+extras/
 htmlcov/
 include/
 lib/
@@ -29,5 +31,7 @@ report.html
 .vscode/
 .tox/
 reports/
-venv/
+pyvenv.cfg
 # excludes
+__pycache__/
+src/rer/customersatisfaction/browser/static/react/dist/dev

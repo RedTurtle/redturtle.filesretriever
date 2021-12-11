@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="redturtle.filesretriever">
+
+  <plone:static
+      name="redturtle.filesretriever"
+      type="plone"
+      directory="static"
+      />
+
+    <browser:page
+      for="*"
+      name="files-retriever"
+      class=".view.View"
+      template="filesretriever.pt"
+      permission="cmf.ModifyPortalContent"
+    />
+</configure>
