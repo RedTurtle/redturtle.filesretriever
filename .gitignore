@@ -1,22 +1,25 @@
+.python-version
+.Python
+pyvenv.cfg
+extras/
 .coverage
 *.egg-info
 *.log
 *.mo
 *.py?
 *.swp
-.python-version
 # dirs
 bin/
 buildout-cache/
 develop-eggs/
 eggs/
-extras/
 htmlcov/
 include/
 lib/
 local/
 node_modules/
 parts/
+src/*
 dist/*
 test.plone_addon/
 var/
@@ -31,7 +34,12 @@ report.html
 .vscode/
 .tox/
 reports/
-pyvenv.cfg
 # excludes
-__pycache__/
-src/rer/customersatisfaction/browser/static/react/dist/dev
+!.coveragerc
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitkeep
+!.travis.yml
+!src/redturtle
+src/redturtle/filesretriever/browser/static/dist/dev
