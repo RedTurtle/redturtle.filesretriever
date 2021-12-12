@@ -42,4 +42,4 @@ reports/
 !.gitkeep
 !.travis.yml
 !src/redturtle
-src/redturtle/filesretriever/browser/static/dist/dev
+src/redturtle/filesretriever/browser/static/react/dist/dev

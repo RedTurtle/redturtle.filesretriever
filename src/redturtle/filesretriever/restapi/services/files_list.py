@@ -5,6 +5,7 @@ from plone.restapi.services import Service
 from redturtle.filesretriever import _
 from requests.exceptions import RequestException
 from requests.exceptions import Timeout
+from urllib.parse import urlparse
 from zope.i18n import translate
 
 import logging
@@ -27,7 +28,9 @@ class FilesListService(Service):
 
         css_class = query.get("class", "")
         css_id = query.get("id", "")
-        links = self.extract_links(html=html, css_class=css_class, css_id=css_id)
+        links = self.extract_links(
+            html=html, css_class=css_class, css_id=css_id, url=url
+        )
         return {"links": links}
 
     def fetch_html(self, url):
@@ -77,7 +80,7 @@ class FilesListService(Service):
             )
         return response.content
 
-    def extract_links(self, html, css_class, css_id):
+    def extract_links(self, html, css_class, css_id, url):
         """ """
         soup = BeautifulSoup(html, "html.parser")
         if css_class:
@@ -94,5 +97,10 @@ class FilesListService(Service):
                 if href == "" or href is None:
                     # href empty tag
                     continue
+                if not href.startswith("http"):
+                    url_parsed = urlparse(url)
+                    href = "{}://{}/{}".format(
+                        url_parsed.scheme, url_parsed.netloc, href.lstrip("/")
+                    )
                 links.append(dict(href=href, text=text))
         return links
