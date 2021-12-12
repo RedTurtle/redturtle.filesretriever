@@ -33,7 +33,7 @@ Utility view to retrieve massive files from a remote page.
 View
 ----
 
-There is an helper view that you can call on every Plone folderish context.
+There is an helper view (**/files-retriever**) that you can call on every Plone folderish context.
 
 Files will be saved in that context.
 

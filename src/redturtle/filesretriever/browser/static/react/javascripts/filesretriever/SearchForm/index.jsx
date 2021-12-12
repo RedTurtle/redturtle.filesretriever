@@ -5,11 +5,9 @@ import { getTranslations } from '../utils';
 import './index.less';
 
 const SearchForm = ({ onSubmit }) => {
-  const [url, setUrl] = useState(
-    'https://www.comune.bibbiano.re.it/servizi/Menu/dinamica.aspx?idSezione=28856&idArea=28280&idCat=28332&ID=28332&TipoElemento=categoria',
-  );
+  const [url, setUrl] = useState('');
   const [cssClass, setCssClass] = useState('');
-  const [cssId, setCssId] = useState('formid_centro');
+  const [cssId, setCssId] = useState('');
   const getTranslationFor = useContext(TranslationsContext);
   const labels = getTranslations(getTranslationFor);
 
