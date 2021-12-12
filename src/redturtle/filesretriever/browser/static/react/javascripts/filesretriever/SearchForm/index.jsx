@@ -49,8 +49,8 @@ const SearchForm = ({ onSubmit }) => {
         </div>
         <div className="css-field">
           <label className="horizontal">
-            {labels.cssClassLabel} {' - '}
-            <span className="formHelp">{labels.cssClassHelp}</span>
+            {labels.cssIdLabel} {' - '}
+            <span className="formHelp">{labels.cssIdHelp}</span>
             <input
               type="text"
               value={cssId}
