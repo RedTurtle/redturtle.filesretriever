@@ -17,6 +17,10 @@ import re
 
 logger = logging.getLogger(__name__)
 
+custom_ct_mapping = {
+    "Documento": {"children": "Modulo", "file_field": "file_principale"}
+}
+
 
 class SaveFilesService(Service):
     """ """
@@ -38,16 +42,7 @@ class SaveFilesService(Service):
                 url["error"] = data.get("error", {})
                 continue
             try:
-                file_obj = api.content.create(
-                    container=self.context,
-                    type="File",
-                    title=url.get("text", data.get("filename", "")),
-                )
-                file_obj.file = NamedBlobFile(
-                    data=data.get("data", ""),
-                    filename=data.get("filename", ""),
-                    contentType=data.get("content-type", ""),
-                )
+                file_obj = self.create_file(data=data, url=url)
                 url["created"] = True
                 url["ploneUrl"] = file_obj.absolute_url()
             except Exception as e:
@@ -64,6 +59,28 @@ class SaveFilesService(Service):
                     ),
                 )
         return urls
+
+    def create_file(self, data, url):
+        """ """
+        children = "File"
+        file_field = "file"
+        if self.context.portal_type in custom_ct_mapping:
+            children = custom_ct_mapping[self.context.portal_type]["children"]
+            file_field = custom_ct_mapping[self.context.portal_type]["file_field"]
+
+        file_obj = api.content.create(
+            container=self.context,
+            type=children,
+            title=url.get("text", data.get("filename", "")),
+        )
+        file_item = NamedBlobFile(
+            data=data.get("data", ""),
+            filename=data.get("filename", ""),
+            contentType=data.get("content-type", ""),
+        )
+        setattr(file_obj, file_field, file_item)
+        file_obj.reindexObject(idxs=["SearchableText"])
+        return file_obj
 
     def fetch_data(self, url):
         """ """
