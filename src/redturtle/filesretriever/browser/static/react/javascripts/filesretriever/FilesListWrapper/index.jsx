@@ -120,7 +120,7 @@ const FilesListWrapper = () => {
         selectableRows
         onSelectedRowsChange={handleRowSelected}
         clearSelectedRows={toggleCleared}
-        selectableRowDisabled={row => row.created === true}
+        selectableRowDisabled={row => row.created === true || row.text === ''}
         contextActions={contextActions}
         contextMessage={{
           singular: labels.singularSelected,

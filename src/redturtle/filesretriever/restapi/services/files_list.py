@@ -14,6 +14,8 @@ import requests
 
 logger = logging.getLogger(__name__)
 
+HREF_NOT_VALID = ["", None, "#"]
+
 
 class FilesListService(Service):
     """ """
@@ -94,7 +96,7 @@ class FilesListService(Service):
             for a_tag in element.findAll("a"):
                 href = a_tag.attrs.get("href")
                 text = a_tag.text
-                if href == "" or href is None:
+                if href in HREF_NOT_VALID or href.startswith("javascript:"):
                     # href empty tag
                     continue
                 if not href.startswith("http"):
@@ -102,5 +104,20 @@ class FilesListService(Service):
                     href = "{}://{}/{}".format(
                         url_parsed.scheme, url_parsed.netloc, href.lstrip("/")
                     )
-                links.append(dict(href=href, text=text))
+                if self.is_file(href):
+                    links.append(dict(href=href, text=text))
         return links
+
+    def is_file(self, href):
+        """ """
+        try:
+            response = requests.head(href, allow_redirects=True)
+        except (Timeout, RequestException) as e:
+            logger.exception(e)
+            return False
+        if response.status_code != 200:
+            return False
+        content_type = response.headers.get("Content-Type", "")
+        if content_type.startswith("text/html"):
+            return False
+        return True
