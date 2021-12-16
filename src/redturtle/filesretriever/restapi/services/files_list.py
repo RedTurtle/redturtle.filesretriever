@@ -104,20 +104,19 @@ class FilesListService(Service):
                     href = "{}://{}/{}".format(
                         url_parsed.scheme, url_parsed.netloc, href.lstrip("/")
                     )
-                if self.is_file(href):
-                    links.append(dict(href=href, text=text))
+                links.append(dict(href=href, text=text))
         return links
 
-    def is_file(self, href):
-        """ """
-        try:
-            response = requests.head(href, allow_redirects=True)
-        except (Timeout, RequestException) as e:
-            logger.exception(e)
-            return False
-        if response.status_code != 200:
-            return False
-        content_type = response.headers.get("Content-Type", "")
-        if content_type.startswith("text/html"):
-            return False
-        return True
+    # def is_file(self, href):
+    #     """ """
+    #     try:
+    #         response = requests.head(href, allow_redirects=True)
+    #     except (Timeout, RequestException) as e:
+    #         logger.exception(e)
+    #         return False
+    #     if response.status_code != 200:
+    #         return False
+    #     content_type = response.headers.get("Content-Type", "")
+    #     if content_type.startswith("text/html"):
+    #         return False
+    #     return True
