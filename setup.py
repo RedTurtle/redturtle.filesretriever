@@ -53,6 +53,8 @@ setup(
         "setuptools",
         "plone.api>=1.8.4",
         "plone.restapi",
+        "requests",
+        "requests-futures",
     ],
     extras_require={
         "test": [

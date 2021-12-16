@@ -7,6 +7,8 @@ from requests.exceptions import RequestException
 from requests.exceptions import Timeout
 from urllib.parse import urlparse
 from zope.i18n import translate
+from concurrent.futures import as_completed
+from requests_futures.sessions import FuturesSession
 
 import logging
 import requests
@@ -91,7 +93,8 @@ class FilesListService(Service):
             root = soup.find_all(id=css_id)
         else:
             root = [soup]
-        links = []
+        links = {}
+
         for element in root:
             for a_tag in element.findAll("a"):
                 href = a_tag.attrs.get("href")
@@ -104,20 +107,34 @@ class FilesListService(Service):
                     href = "{}://{}/{}".format(
                         url_parsed.scheme, url_parsed.netloc, href.lstrip("/")
                     )
-                if self.is_file(href):
-                    links.append(dict(href=href, text=text))
-        return links
+                links[href] = text
+        file_links = []
+        # now filter only links to files
+        with FuturesSession() as session:
+            futures = [session.head(x, allow_redirects=True) for x in links.keys()]
+            for future in as_completed(futures):
+                logging.info("Completato")
+                res = self.check_file(future=future, links=links)
+                if res:
+                    file_links.append(res)
 
-    def is_file(self, href):
+        return file_links
+
+    def check_file(self, future, links):
         """ """
         try:
-            response = requests.head(href, allow_redirects=True)
+            response = future.result()
         except (Timeout, RequestException) as e:
             logger.exception(e)
-            return False
+            return None
         if response.status_code != 200:
-            return False
+            return None
         content_type = response.headers.get("Content-Type", "")
         if content_type.startswith("text/html"):
-            return False
-        return True
+            return None
+        url = response.url
+        if url not in links:
+            # it's a redirect
+            if response.history:
+                url = response.history[0].url
+        return {"href": url, "text": links[url]}
