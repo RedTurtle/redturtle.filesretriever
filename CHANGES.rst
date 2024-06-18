@@ -5,7 +5,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Better handle edge-cases in content-type ad disposition headers.
+  [cekk]
 
 
 1.0.0 (2021-12-27)

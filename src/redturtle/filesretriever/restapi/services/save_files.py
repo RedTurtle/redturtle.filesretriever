@@ -52,7 +52,7 @@ class SaveFilesService(Service):
                 url["error"] = dict(
                     error=translate(
                         _(
-                            u"Error creating file: ${message}",
+                            "Error creating file: ${message}",
                             mapping={"message": message},
                         ),
                         context=self.request,
@@ -115,12 +115,14 @@ class SaveFilesService(Service):
             return dict(error=message)
         filename = ""
         if "Content-Disposition" in response.headers.keys():
-            filename = re.findall(
+            re_find = re.findall(
                 "filename=(.+)", response.headers["Content-Disposition"]
-            )[0]
-        else:
+            )
+            if re_find:
+                filename = re_find[0]
+        if not filename:
             filename = response.url.split("/")[-1]
-        content_type = response.headers.get("Content-Type", "")
+        content_type = response.headers.get("Content-Type", "").split(";")[0]
         if content_type.startswith("text/html"):
             return dict(
                 error=translate(
@@ -135,5 +137,5 @@ class SaveFilesService(Service):
         return {
             "filename": filename,
             "data": response.content,
-            "content-type": response.headers.get("Content-Type", ""),
+            "content-type": content_type,
         }
