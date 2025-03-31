@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from redturtle.filesretriever import _
+from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException
 from requests.exceptions import Timeout
 from urllib.parse import urlparse
@@ -10,6 +11,21 @@ from zope.i18n import translate
 
 import logging
 import requests
+import ssl
+
+
+# Creazione di un adattatore con TLS 1.2 o superiore
+class AddedCipherAdapter(HTTPAdapter):
+    """
+    This is needed because some websites (e.g. bassareggiana.it) are using old tls versions.
+    This is a workaround to decrease the security level of the connection.
+    """
+
+    def init_poolmanager(self, *args, **kwargs):
+        context = ssl.create_default_context()
+        context.set_ciphers("DEFAULT@SECLEVEL=1")
+        kwargs["ssl_context"] = context
+        super().init_poolmanager(*args, **kwargs)
 
 
 logger = logging.getLogger(__name__)
@@ -37,8 +53,10 @@ class FilesListService(Service):
 
     def fetch_html(self, url):
         """ """
+        session = requests.Session()
+        session.mount("https://", AddedCipherAdapter())
         try:
-            response = requests.get(url, timeout=10)
+            response = session.get(url, timeout=10)
         except Timeout as e:
             logger.exception(e)
             return dict(

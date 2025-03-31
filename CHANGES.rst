@@ -5,7 +5,8 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add custom Cipher adapter for requests session to allow download files from servers with old/wrong ssl certs.
+  [cekk]
 
 
 1.0.1 (2024-06-18)
