@@ -5,7 +5,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle wrong ssl certs also when download data.
+  [cekk]
 
 
 1.0.2 (2025-03-31)

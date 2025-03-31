@@ -10,6 +10,7 @@ from copy import deepcopy
 from plone import api
 from plone.namedfile.file import NamedBlobFile
 from plone.protect.interfaces import IDisableCSRFProtection
+from redturtle.filesretriever.restapi.services import AddedCipherAdapter
 
 import logging
 import requests
@@ -26,6 +27,9 @@ class SaveFilesService(Service):
     """ """
 
     def reply(self):
+        self.session = requests.Session()
+        self.session.mount("https://", AddedCipherAdapter())
+
         query = json_body(self.request)
         urls = deepcopy(query.get("urls", []))
         # Disable CSRF protection
@@ -85,7 +89,7 @@ class SaveFilesService(Service):
     def fetch_data(self, url):
         """ """
         try:
-            response = requests.get(url, timeout=10)
+            response = self.session.get(url, timeout=10)
         except Timeout as e:
             logger.exception(e)
             return dict(
