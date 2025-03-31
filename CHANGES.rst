@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.3 (unreleased)
+1.0.3 (2025-03-31)
 ------------------
 
 - Handle wrong ssl certs also when download data.
