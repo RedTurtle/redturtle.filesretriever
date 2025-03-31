@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.0.2 (2025-03-31)
 ------------------
 
 - Add custom Cipher adapter for requests session to allow download files from servers with old/wrong ssl certs.
