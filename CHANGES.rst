@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.4 (unreleased)
+1.0.4 (2025-09-16)
 ------------------
 
 - Handle relative links in html pages.
