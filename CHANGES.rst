@@ -5,7 +5,8 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle relative links in html pages.
+  [cekk]
 
 
 1.0.3 (2025-03-31)

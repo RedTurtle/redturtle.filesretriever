@@ -103,10 +103,13 @@ class FilesListService(Service):
                     # href empty tag
                     continue
                 if not href.startswith("http"):
-                    url_parsed = urlparse(url)
-                    href = "{}://{}/{}".format(
-                        url_parsed.scheme, url_parsed.netloc, href.lstrip("/")
-                    )
+                    # url_parsed = urlparse(url)
+                    # href = "{}://{}/{}".format(
+                    #     url_parsed.scheme,
+                    #     url_parsed.netloc,
+                    #     href.lstrip("./").lstrip("/"),
+                    # )
+                    href = requests.compat.urljoin(url, href)
                 links.append(dict(href=href, text=text))
         return links
 
