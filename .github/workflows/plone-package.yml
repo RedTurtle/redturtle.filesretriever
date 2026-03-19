@@ -19,7 +19,7 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
               with:
                   path: |
                     ~/.cache/pip
