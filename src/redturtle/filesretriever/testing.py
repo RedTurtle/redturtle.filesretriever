@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import (
-    applyProfile,
-    FunctionalTesting,
-    IntegrationTesting,
-    PloneSandboxLayer,
-)
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
 import redturtle.filesretriever
@@ -24,9 +21,6 @@ class RedturtleFilesretrieverLayer(PloneSandboxLayer):
 
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=redturtle.filesretriever)
-
-    def setUpPloneSite(self, portal):
-        applyProfile(portal, "redturtle.filesretriever:default")
 
 
 REDTURTLE_FILESRETRIEVER_FIXTURE = RedturtleFilesretrieverLayer()

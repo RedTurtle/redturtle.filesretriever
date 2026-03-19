@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-from plone.restapi.services import Service
-from redturtle.filesretriever import _
-from requests.exceptions import RequestException
-from requests.exceptions import Timeout
-from zope.i18n import translate
-from zope.interface import alsoProvides
-from plone.restapi.deserializer import json_body
 from copy import deepcopy
 from plone import api
 from plone.namedfile.file import NamedBlobFile
 from plone.protect.interfaces import IDisableCSRFProtection
+from plone.restapi.deserializer import json_body
+from plone.restapi.services import Service
+from redturtle.filesretriever import _
 from redturtle.filesretriever.restapi.services import AddedCipherAdapter
+from requests.exceptions import RequestException
+from requests.exceptions import Timeout
+from zope.i18n import translate
+from zope.interface import alsoProvides
 
 import logging
-import requests
 import re
+import requests
 
 logger = logging.getLogger(__name__)
 
