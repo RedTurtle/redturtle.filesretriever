@@ -125,7 +125,7 @@ class SaveFilesService(Service):
             if re_find:
                 filename = re_find[0]
         if not filename:
-            filename = response.url.split("/")[-1]
+            filename = response.url.split("/")[-1].split("?")[0]
         content_type = response.headers.get("Content-Type", "").split(";")[0]
         if content_type.startswith("text/html"):
             return dict(
