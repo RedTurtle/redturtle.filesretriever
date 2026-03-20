@@ -28,5 +28,5 @@ jobs:
         run: pip install isort
 
       - name: run isort
-        run: isort --check-only redturtle
+        run: isort --check-only src
 
