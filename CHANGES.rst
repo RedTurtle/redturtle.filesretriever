@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.5 (unreleased)
+1.0.5 (2026-03-20)
 ------------------
 
 - Handle fileurl wiith querystring
