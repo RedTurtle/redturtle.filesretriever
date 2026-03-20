@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
 from plone import api
 from plone.memoize import ram
+from Products.Five import BrowserView
 from time import time
 
 import pkg_resources
-
 
 JS_TEMPLATE = "{portal_url}/++plone++redturtle.filesretriever/react/dist/{env_mode}/{name}.js?v={version}"  # noqa
 CSS_TEMPLATE = "{portal_url}/++plone++redturtle.filesretriever/react/dist/{env_mode}/{name}.css?v={version}"  # noqa

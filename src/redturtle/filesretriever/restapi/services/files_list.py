@@ -3,15 +3,15 @@ from bs4 import BeautifulSoup
 from plone.restapi.deserializer import json_body
 from plone.restapi.services import Service
 from redturtle.filesretriever import _
+from redturtle.filesretriever.restapi.services import AddedCipherAdapter
 from requests.exceptions import RequestException
 from requests.exceptions import Timeout
-from urllib.parse import urlparse
+
+# from urllib.parse import urlparse
 from zope.i18n import translate
-from redturtle.filesretriever.restapi.services import AddedCipherAdapter
 
 import logging
 import requests
-
 
 logger = logging.getLogger(__name__)
 

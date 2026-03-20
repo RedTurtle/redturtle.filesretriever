@@ -3,6 +3,7 @@
 pyvenv.cfg
 extras/
 .coverage
+.coverage.*
 *.egg-info
 *.log
 *.mo

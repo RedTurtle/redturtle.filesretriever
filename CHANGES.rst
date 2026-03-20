@@ -5,7 +5,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle fileurl wiith querystring
+  [mamico]
 
 
 1.0.4 (2025-09-16)
